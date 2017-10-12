@@ -3,32 +3,41 @@
     <h1 id="title">The Super Quiz</h1>
     <hr>
     <br>
-    <div id="quiz">
-      <div id="question">
-        <h4>What's 27 - 24?</h4>
-      </div>
-      <div id="answers">
-        <button>2</button>
-        <button>3</button>
-        <button>4</button>
-        <button>5</button>
-      </div>
-    </div>
-  </div>
+    <button @click="switchComponents">hey</button>
+    <transition name="switch" type="transition" mode="out-in">
+      <component :is="chosenComponent"></component>
+    </transition>
   </div>
 </template>
 
 <script>
+import Quiz from './components/Quiz';
+import Correct from './components/Correct';
+
 export default {
+  components: {
+    Quiz,
+    Correct,
+  },
+  data() {
+    return {
+      chosenComponent: 'quiz',
+    };
+  },
+  methods: {
+    switchComponents() {
+      /* eslint-disable no-constant-condition  */
+      if (this.chosenComponent === 'quiz') {
+        this.chosenComponent = 'correct';
+      } else {
+        this.chosenComponent = 'quiz';
+      }
+    },
+  },
 };
 </script>
 
 <style scoped>
-
-h4 {
-  margin: 0;
-}
-
 hr {
   width: 80%;
 }
@@ -37,40 +46,19 @@ hr {
   text-align: center;
 }
 
-#question {
-  background-color: #EEEEEE;
-  text-align: center;
-  border: 1px solid darkgray;
-  height: 30px;
-  line-height: 30px;
+.switch-enter {
+  transform: rotate3d(0, 1, 0, 90deg);
 }
 
-#answers {
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
+.switch-enter-active {
+  transition: all 0.5s;
 }
 
-#quiz {
-  border: 1px solid gray;
-  width: 40%;
-  margin: 0 auto;
+.switch-leave {
 }
 
-button {
-  width: 25%;
-  margin: 5% 12.5%;
-  background-color: lightskyblue;
-  border: 1px solid darkgray;
-  border-radius: 8px;
-  height: 30px;
-  color: white;
-  font-weight: 600;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-button:focus {
-  outline: none;
+.switch-leave-active {
+  transform: rotate3d(0, 1, 0, -90deg);
+  transition: all 0.5s;
 }
 </style>
