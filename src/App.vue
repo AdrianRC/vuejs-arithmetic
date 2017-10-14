@@ -12,11 +12,13 @@
 <script>
 import Quiz from './components/Quiz';
 import Correct from './components/Correct';
+import Incorrect from './components/Incorrect';
 
 export default {
   components: {
     Quiz,
     Correct,
+    Incorrect,
   },
   data() {
     return {

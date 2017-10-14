@@ -61,6 +61,8 @@ export default {
     check(number) {
       if (number === this.chosenAnswer) {
         this.switchComponents('correct');
+      } else {
+        this.switchComponents('incorrect');
       }
     },
   },
