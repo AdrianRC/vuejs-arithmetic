@@ -3,9 +3,8 @@
     <h1 id="title">The Super Quiz</h1>
     <hr>
     <br>
-    <button @click="switchComponents">hey</button>
     <transition name="switch" type="transition" mode="out-in">
-      <component :is="chosenComponent"></component>
+      <component :is="chosenComponent" :switchComponents="switchComponents"></component>
     </transition>
   </div>
 </template>
@@ -25,13 +24,8 @@ export default {
     };
   },
   methods: {
-    switchComponents() {
-      /* eslint-disable no-constant-condition  */
-      if (this.chosenComponent === 'quiz') {
-        this.chosenComponent = 'correct';
-      } else {
-        this.chosenComponent = 'quiz';
-      }
+    switchComponents(component) {
+      this.chosenComponent = component;
     },
   },
 };
@@ -47,18 +41,15 @@ hr {
 }
 
 .switch-enter {
-  transform: rotate3d(0, 1, 0, 90deg);
+  transform: rotateY(90deg)
 }
 
 .switch-enter-active {
   transition: all 0.5s;
 }
 
-.switch-leave {
-}
-
 .switch-leave-active {
-  transform: rotate3d(0, 1, 0, -90deg);
+  transform: rotateY(90deg);
   transition: all 0.5s;
 }
 </style>
